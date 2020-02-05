@@ -93,10 +93,10 @@ export class CreateWalletPage implements OnInit {
       bwsURL: [this.defaults.bws.url],
       selectedSeed: ['new'],
       recoveryPhrase: [null],
-      derivationPath: [this.derivationPathByDefault['part']],
+      derivationPath: [this.derivationPathByDefault['darkpay']],
       testnetEnabled: [false],
       singleAddress: [false],
-      coin: ['part', Validators.required]
+      coin: ['darkpay', Validators.required]
     });
 
     this.setTotalCopayers(this.tc);
@@ -129,7 +129,7 @@ export class CreateWalletPage implements OnInit {
       {
         id: 'new',
         label: this.translate.instant('Random'),
-        supportsTestnet: true
+        supportsTestnet: false
       },
       {
         id: 'set',

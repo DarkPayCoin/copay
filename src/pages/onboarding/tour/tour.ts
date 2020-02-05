@@ -31,7 +31,7 @@ export class TourPage {
   navBar: Navbar;
 
   public localCurrencySymbol: string;
-  public localCurrencyPerPart: string;
+  public localCurrencyPerDarkpay: string;
   public currentIndex: number;
 
   private retryCount: number = 0;
@@ -52,8 +52,8 @@ export class TourPage {
     this.rateProvider.whenRatesAvailable('btc').then(() => {
       let partAmount = 1;
       this.localCurrencySymbol = '$';
-      this.localCurrencyPerPart = this.txFormatProvider.formatAlternativeStr(
-        'part',
+      this.localCurrencyPerDarkpay = this.txFormatProvider.formatAlternativeStr(
+        'darkpay',
         partAmount * 1e8
       );
     });

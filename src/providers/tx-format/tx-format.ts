@@ -59,6 +59,8 @@ export class TxFormatProvider {
 
   public formatAmountStr(coin: string, satoshis: number): string {
     if (isNaN(satoshis)) return undefined;
+    // ROM
+    if (coin == 'darkpay') return this.formatAmount(satoshis) + ' ' + 'D4RK';
     return this.formatAmount(satoshis) + ' ' + coin.toUpperCase();
   }
 
@@ -209,7 +211,9 @@ export class TxFormatProvider {
       amountUnitStr = this.formatAmountStr(coin, amountSat);
       // convert unit to BTC or BCH
       amount = (amountSat * satToBtc).toFixed(8);
-      currency = coin.toUpperCase();
+      // ROM
+       currency = coin.toUpperCase();
+      // currency = 'D4RK';
     }
 
     return {

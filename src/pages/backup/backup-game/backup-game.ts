@@ -273,8 +273,8 @@ export class BackupGamePage {
           case 'bch':
             walletType = 'bitcoin cash';
             break;
-          case 'part':
-            walletType = 'particl';
+          case 'darkpay':
+            walletType = 'darkpay';
             break;
           default:
             walletType = 'bitcoin';

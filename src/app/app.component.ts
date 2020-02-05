@@ -414,9 +414,9 @@ export class CopayApp {
   }
 
   private processUrl(pathData): void {
-    if (pathData.indexOf('particl:/') != -1) {
-      this.logger.debug('Particl URL found');
-      this.handleOpenUrl(pathData.substring(pathData.indexOf('particl:/')));
+    if (pathData.indexOf('darkpay:/') != -1) {
+      this.logger.debug('Darkpay URL found');
+      this.handleOpenUrl(pathData.substring(pathData.indexOf('darkpay:/')));
     } else if (pathData.indexOf('bitcoincash:/') != -1) {
       this.logger.debug('Bitcoin Cash URL found');
       this.handleOpenUrl(pathData.substring(pathData.indexOf('bitcoincash:/')));

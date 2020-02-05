@@ -76,8 +76,8 @@ export class JoinWalletPage {
       bwsURL: [this.defaults.bws.url],
       selectedSeed: ['new'],
       recoveryPhrase: [null],
-      derivationPath: [this.derivationPathByDefault['part']],
-      coin: ['part', Validators.required]
+      derivationPath: [this.derivationPathByDefault['darkpay']],
+      coin: ['darkpay', Validators.required]
     });
 
     this.seedOptions = [

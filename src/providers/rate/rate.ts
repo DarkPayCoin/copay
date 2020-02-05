@@ -9,31 +9,31 @@ export class RateProvider {
   private rates;
   private alternatives;
   private ratesBCH;
-  private ratesPART;
+  private ratesD4RK;
   private ratesBtcAvailable: boolean;
   private ratesBchAvailable: boolean;
-  private ratesPartAvailable: boolean;
+  private ratesDarkpayAvailable: boolean;
 
   private SAT_TO_BTC: number;
   private BTC_TO_SAT: number;
 
   private rateServiceUrl = env.ratesAPI.btc;
   private bchRateServiceUrl = env.ratesAPI.bch;
-  private partRateServiceUrl = env.ratesAPI.part;
+  private darkpayRateServiceUrl = env.ratesAPI.darkpay;
 
   constructor(private http: HttpClient, private logger: Logger) {
     this.logger.debug('RateProvider initialized');
     this.rates = {};
     this.alternatives = [];
     this.ratesBCH = {};
-    this.ratesPART = {};
+    this.ratesD4RK = {};
     this.SAT_TO_BTC = 1 / 1e8;
     this.BTC_TO_SAT = 1e8;
     this.ratesBtcAvailable = false;
     this.ratesBchAvailable = false;
     this.updateRatesBtc();
     this.updateRatesBch();
-    this.updateRatesPart();
+    this.updateRatesDarkpay();
   }
 
   public updateRatesBtc(): Promise<any> {
@@ -75,29 +75,31 @@ export class RateProvider {
     });
   }
 
-  public updateRatesPart(): Promise<any> {
+  public updateRatesDarkpay(): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.getPART().then(dataPART => {
-        const rate_btc = dataPART[0].price_btc;
+      this.getD4RK().then(dataD4RK => {
+      // CMC  const rate_btc = dataD4RK[0].price_btc;
+      // CPP
+       const rate_btc = dataD4RK.price_btc;
         this.getBTC()
           .then(dataBTC => {
             _.each(dataBTC, currency => {
-              this.ratesPART[currency.code] = currency.rate * rate_btc;
+              this.ratesD4RK[currency.code] = currency.rate * rate_btc;
             });
-            this.ratesPartAvailable = true;
+            this.ratesDarkpayAvailable = true;
             resolve();
           })
-          .catch(errorPART => {
-            this.logger.error(errorPART);
-            reject(errorPART);
+          .catch(errorD4RK => {
+            this.logger.error(errorD4RK);
+            reject(errorD4RK);
           });
       });
     });
   }
 
-  public getPART(): Promise<any> {
+  public getD4RK(): Promise<any> {
     return new Promise(resolve => {
-      this.http.get(this.partRateServiceUrl).subscribe(data => {
+      this.http.get(this.darkpayRateServiceUrl).subscribe(data => {
         resolve(data);
       });
     });
@@ -121,7 +123,7 @@ export class RateProvider {
 
   public getRate(code: string, chain?: string): number {
     if (chain == 'bch') return this.ratesBCH[code];
-    if (chain == 'part') return this.ratesPART[code];
+    if (chain == 'darkpay') return this.ratesD4RK[code];
     else return this.rates[code];
   }
 
@@ -137,15 +139,15 @@ export class RateProvider {
     return this.ratesBchAvailable;
   }
 
-  public isPartAvailable() {
-    return this.ratesPartAvailable;
+  public isDarkpayAvailable() {
+    return this.ratesDarkpayAvailable;
   }
 
   public toFiat(satoshis: number, code: string, chain: string): number {
     if (
       (!this.isBtcAvailable() && chain == 'btc') ||
       (!this.isBchAvailable() && chain == 'bch') ||
-      (!this.isPartAvailable() && chain == 'part')
+      (!this.isDarkpayAvailable() && chain == 'darkpay')
     ) {
       return null;
     }
@@ -156,7 +158,7 @@ export class RateProvider {
     if (
       (!this.isBtcAvailable() && chain == 'btc') ||
       (!this.isBchAvailable() && chain == 'bch') ||
-      (!this.isPartAvailable() && chain == 'part')
+      (!this.isDarkpayAvailable() && chain == 'darkpay')
     ) {
       return null;
     }
@@ -183,7 +185,7 @@ export class RateProvider {
       if (
         (this.ratesBtcAvailable && chain == 'btc') ||
         (this.ratesBchAvailable && chain == 'bch') ||
-        (this.ratesPartAvailable && chain == 'part')
+        (this.ratesDarkpayAvailable && chain == 'darkpay')
       )
         resolve();
       else {
@@ -197,8 +199,8 @@ export class RateProvider {
             resolve();
           });
         }
-        if (chain == 'part') {
-          this.updateRatesPart().then(() => {
+        if (chain == 'darkpay') {
+          this.updateRatesDarkpay().then(() => {
             resolve();
           });
         }

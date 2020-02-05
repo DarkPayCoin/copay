@@ -69,7 +69,7 @@ export class PaperWalletPage {
   ) {
     this.bitcore = {
       btc: this.bwcProvider.getBitcore(),
-      part: this.bwcProvider.getBitcoreParticl()
+      part: this.bwcProvider.getBitcoreDarkpay()
     };
     this.isCordova = this.platformProvider.isCordova;
     this.isOpenSelector = false;

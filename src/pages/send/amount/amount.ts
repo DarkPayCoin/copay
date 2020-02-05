@@ -225,11 +225,11 @@ export class AmountPage extends WalletTabsChild {
       });
     }
 
-    if (parentWalletCoin === 'part' || !parentWalletCoin) {
+    if (parentWalletCoin === 'darkpay' || !parentWalletCoin) {
       this.availableUnits.push({
-        name: 'Particl',
-        id: 'part',
-        shortName: 'PART'
+        name: 'Darkpay',
+        id: 'darkpay',
+        shortName: 'D4RK'
       });
     }
 

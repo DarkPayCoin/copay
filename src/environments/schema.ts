@@ -8,7 +8,7 @@ export interface EnvironmentSchema {
   ratesAPI: {
     btc: string;
     bch: string;
-    part: string;
+    darkpay: string;
   };
   activateScanner: boolean;
 }

@@ -68,10 +68,11 @@ export class FeeProvider {
           }
           if (!feeLevelRate || !feeLevelRate.feePerKb) {
             let msg =
-              this.translate.instant('Could not get dynamic fee for level:') +
-              ' ' +
-              feeLevel;
-            return reject(msg);
+             this.translate.instant('*** Could not get dynamic fee for level:') +
+             ' ' +
+             feeLevel;
+           return reject(msg);
+           // return resolve('30000');
           }
 
           let feeRate = feeLevelRate.feePerKb;
@@ -127,7 +128,7 @@ export class FeeProvider {
           }
           walletClient.getFeeLevels(
             coin,
-            'testnet',
+            'livenet',
             (errTestnet, levelsTestnet) => {
               if (errTestnet) {
                 return reject(

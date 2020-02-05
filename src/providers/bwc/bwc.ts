@@ -20,8 +20,8 @@ export class BwcProvider {
     return BWC.BitcoreCash;
   }
 
-  public getBitcoreParticl() {
-    return BWC.BitcoreParticl;
+  public getBitcoreDarkpay() {
+    return BWC.BitcoreDarkpay;
   }
 
   public getErrors() {
@@ -41,7 +41,7 @@ export class BwcProvider {
 
     // note opts use `bwsurl` all lowercase;
     let bwc = new BWC({
-      baseUrl: opts.bwsurl || 'https://bws.particl.io/bws/api',
+      baseUrl: opts.bwsurl || 'https://bws.darkpay.market/bws/api',
       verbose: opts.verbose,
       timeout: 100000,
       transports: ['polling']
