@@ -1,8 +1,6 @@
 ## DarkPay Copay pre-release
 
 
-![Preview](preview.gif)
-
 Darkpay Copay is a secure darkpay wallet platform for both desktop and mobile devices. Copay uses [Bitcore Wallet Service](https://github.com/DarkPayCoin/bitcore-wallet-service) (BWS) for peer synchronization and network interfacing.
 
 For a list of frequently asked questions please visit the [Copay FAQ](https://github.com/bitpay/copay/wiki/COPAY---FAQ).
